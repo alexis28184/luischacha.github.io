@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Balones Deportivos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+      color: #000;
+    }
+
+    .encabezado {
+      background-color: #005f99;
+      color: white;
+      padding: 10px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      width: 60px;
+      height: 60px;
+    }
+
+    .logo h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .botones {
+      text-align: center;
+      margin: 15px 0;
+    }
+
+    .botones button {
+      margin: 5px;
+      padding: 10px 15px;
+      background-color: #007acc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .botones button:hover {
+      background-color: #005f99;
+    }
+
+    .catalogo {
+      display: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px;
+    }
+
+    .producto {
+      border: 1px solid #ccc;
+      padding: 10px;
+      width: 200px;
+      background-color: white;
+      text-align: center;
+    }
+
+    .producto img {
+      width: 100%;
+      height: auto;
+    }
+
+    #carritoToggle {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background-color: #ffcc00;
+      color: black;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 50%;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .notificacion {
+      background-color: red;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 12px;
+      position: absolute;
+      top: -5px;
+      right: -5px;
+    }
+
+    #carrito {
+      position: fixed;
+      top: 50px;
+      right: 10px;
+      width: 280px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      padding: 10px;
+      display: none;
+    }
+
+    footer {
+      background-color: #005f99;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      margin-top: 30px;
+    }
+
+    footer a {
+      color: yellow;
+      text-decoration: none;
+      margin: 0 5px;
+    }
+
+    #historial {
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="encabezado">
+    <div class="logo">
+      <img src="logo.jpg" alt="Logo">
+      <h1>El mundo de los balones</h1>
+    </div>
+  </header>
+
+  <button id="carritoToggle">🛒 <span id="contador" class="notificacion">0</span></button>
+
+  <div class="botones">
+    <button onclick="mostrarCatalogo('futbol')">Fútbol</button>
+    <button onclick="mostrarCatalogo('basquetbol')">Básquetbol</button>
+    <button onclick="mostrarCatalogo('voleibol')">Voleibol</button>
+    <button onclick="mostrarCatalogo('americano')">Americano</button>
+    <button onclick="mostrarTodos()">Todos</button>
+  </div>
+
+  <!-- Catálogos -->
+  <div id="futbol" class="catalogo">
+    <div class="producto"><img src="balon adidas.jpg"><h3>Adidas Mundial</h3><p>$800</p><button onclick="agregarAlCarrito('Adidas Mundial', 800)">Agregar</button></div>
+    <div class="producto"><img src="balon gaser.jpg"><h3>Gaser</h3><p>$350</p><button onclick="agregarAlCarrito('Gaser', 350)">Agregar</button></div>
+    <div class="producto"><img src="balon nike.jpg"><h3>Nike</h3><p>$400</p><button onclick="agregarAlCarrito('Nike', 400)">Agregar</button></div>
+  </div>
+
+  <div id="basquetbol" class="catalogo">
+    <div class="producto"><img src="balon wilson.jpg"><h3>Wilson NBA</h3><p>$900</p><button onclick="agregarAlCarrito('Wilson NBA', 900)">Agregar</button></div>
+    <div class="producto"><img src="balon spalding.jpg"><h3>Spalding</h3><p>$850</p><button onclick="agregarAlCarrito('Spalding', 850)">Agregar</button></div>
+    <div class="producto"><img src="balon jordan.jpg"><h3>Jordan FIBA</h3><p>$380</p><button onclick="agregarAlCarrito('Jordan FIBA', 380)">Agregar</button></div>
+  </div>
+
+  <div id="voleibol" class="catalogo">
+    <div class="producto"><img src="balon economico voit.jpg"><h3>Voit V200W</h3><p>$200</p><button onclick="agregarAlCarrito('Voit V200W', 200)">Agregar</button></div>
+    <div class="producto"><img src="balon gaser azul.jpg"><h3>Gaser V5M5000</h3><p>$320</p><button onclick="agregarAlCarrito('Gaser V5M5000', 320)">Agregar</button></div>
+    <div class="producto"><img src="balon molten.jpg"><h3>Molten AVP</h3><p>$580</p><button onclick="agregarAlCarrito('Molten AVP', 580)">Agregar</button></div>
+  </div>
+
+  <div id="americano" class="catalogo">
+    <div class="producto"><img src="balon nike rojo.jpg"><h3>Nike NFL</h3><p>$450</p><button onclick="agregarAlCarrito('Nike NFL', 450)">Agregar</button></div>
+    <div class="producto"><img src="balon wilson.jpg"><h3>Wilson Vapor</h3><p>$320</p><button onclick="agregarAlCarrito('Wilson Vapor', 320)">Agregar</button></div>
+    <div class="producto"><img src="balon voit cafe.jpg"><h3>Voit 395</h3><p>$290</p><button onclick="agregarAlCarrito('Voit 395', 290)">Agregar</button></div>
+  </div>
+
+  <div id="carrito">
+    <h3>Carrito</h3>
+    <ul id="lista-carrito"></ul>
+    <p>Total: $<span id="total">0</span></p>
+    <button onclick="realizarCompra()">Comprar</button>
+    <button onclick="cerrarCarrito()">Cerrar</button>
+  </div>
+
+  <h2 style="text-align:center;">Historial de Compras</h2>
+  <ul id="historial"></ul>
+
+  <footer>
+    <p>Síguenos en:</p>
+    <a href="https://www.facebook.com/share/1GqiSrUZNx/" target="_blank">Facebook</a>
+    <a href="https://www.instagram.com/luis._chacha/" target="_blank">Instagram</a>
+    <p>Tel: 2941336494</p>
+    <p>Dirección: Santiago Tuxtla, Ver.</p>
+  </footer>
+
+  <script>
+    let carrito = [];
+
+    function ocultarTodos() {
+      document.querySelectorAll('.catalogo').forEach(el => el.style.display = 'none');
+    }
+
+    function mostrarCatalogo(cat) {
+      ocultarTodos();
+      document.getElementById(cat).style.display = 'flex';
+    }
+
+    function mostrarTodos() {
+      document.querySelectorAll('.catalogo').forEach(el => el.style.display = 'flex');
+    }
+
+    function agregarAlCarrito(nombre, precio) {
+      carrito.push({ nombre, precio });
+      actualizarCarrito();
+    }
+
+    function actualizarCarrito() {
+      const lista = document.getElementById('lista-carrito');
+      lista.innerHTML = '';
+      let total = 0;
+      carrito.forEach((item, i) => {
+        const li = document.createElement('li');
+        li.innerHTML = `${item.nombre} - $${item.precio} <button onclick="eliminarDelCarrito(${i})">Eliminar</button>`;
+        lista.appendChild(li);
+        total += item.precio;
+      });
+      document.getElementById('total').textContent = total;
+      document.getElementById('contador').textContent = carrito.length;
+    }
+
+    function eliminarDelCarrito(i) {
+      carrito.splice(i, 1);
+      actualizarCarrito();
+    }
+
+    function realizarCompra() {
+      if (carrito.length === 0) return alert("El carrito está vacío.");
+      const historial = document.getElementById('historial');
+      carrito.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = `${item.nombre} - $${item.precio}`;
+        historial.appendChild(li);
+      });
+      carrito = [];
+      actualizarCarrito();
+      alert("¡Compra realizada!");
+    }
+
+    function cerrarCarrito() {
+      document.getElementById('carrito').style.display = 'none';
+    }
+
+    document.getElementById('carritoToggle').addEventListener('click', () => {
+      const carritoDiv = document.getElementById('carrito');
+      carritoDiv.style.display = carritoDiv.style.display === 'block' ? 'none' : 'block';
+    });
+
+    window.onload = () => mostrarTodos();
+  </script>
+
+</body>
+</html>
