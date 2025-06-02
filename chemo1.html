@@ -2,13 +2,12 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Balones Deportivos</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       background-color: #f2f2f2;
       color: #000;
     }
@@ -56,11 +55,11 @@
 
     .catalogo {
       display: none;
-      display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 10px;
       padding: 10px;
+      display: flex;
     }
 
     .producto {
@@ -109,6 +108,8 @@
       border: 1px solid #ccc;
       padding: 10px;
       display: none;
+      max-height: 80vh;
+      overflow-y: auto;
     }
 
     footer {
@@ -127,14 +128,70 @@
 
     #historial {
       padding: 10px;
+      max-width: 600px;
+      margin: 0 auto 30px auto;
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    /* Formulario registro modal */
+    #registro {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(0,0,0,0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    #registro form {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      width: 320px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    #registro input {
+      padding: 8px;
+      font-size: 16px;
+    }
+
+    #registro button {
+      padding: 10px;
+      background-color: #007acc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #registro button:hover {
+      background-color: #005f99;
     }
   </style>
 </head>
 <body>
 
+  <!-- Formulario de Registro -->
+  <div id="registro">
+    <form onsubmit="return validarRegistro()">
+      <h2>Registro</h2>
+      <input type="text" id="nombre" placeholder="Nombre" required />
+      <input type="password" id="clave" placeholder="Contraseña" required />
+      <button type="submit">Ingresar</button>
+    </form>
+  </div>
+
   <header class="encabezado">
     <div class="logo">
-      <img src="logo.jpg" alt="Logo">
+      <img src="logo.jpg" alt="Logo" />
       <h1>El mundo de los balones</h1>
     </div>
   </header>
@@ -149,30 +206,102 @@
     <button onclick="mostrarTodos()">Todos</button>
   </div>
 
-  <!-- Catálogos -->
-  <div id="futbol" class="catalogo">
-    <div class="producto"><img src="balon adidas.jpg"><h3>Adidas Mundial</h3><p>$800</p><button onclick="agregarAlCarrito('Adidas Mundial', 800)">Agregar</button></div>
-    <div class="producto"><img src="balon gaser.jpg"><h3>Gaser</h3><p>$350</p><button onclick="agregarAlCarrito('Gaser', 350)">Agregar</button></div>
-    <div class="producto"><img src="balon nike.jpg"><h3>Nike</h3><p>$400</p><button onclick="agregarAlCarrito('Nike', 400)">Agregar</button></div>
+ <!-- Catálogos -->
+<div id="futbol" class="catalogo">
+  <div class="producto">
+    <img src="balon adidas.jpg">
+    <h3>Adidas Mundial</h3>
+    <p>Balón profesional de alta resistencia, ideal para competiciones oficiales.</p>
+    <p>$800</p>
+    <button onclick="agregarAlCarrito('Adidas Mundial', 800)">Agregar</button>
   </div>
+  <div class="producto">
+    <img src="balon gaser.jpg">
+    <h3>Gaser</h3>
+    <p>Balón económico para entrenamientos y partidos recreativos.</p>
+    <p>$350</p>
+    <button onclick="agregarAlCarrito('Gaser', 350)">Agregar</button>
+  </div>
+  <div class="producto">
+    <img src="balon nike.jpg">
+    <h3>Nike</h3>
+    <p>Diseño moderno y duradero, con buen agarre y control.</p>
+    <p>$400</p>
+    <button onclick="agregarAlCarrito('Nike', 400)">Agregar</button>
+  </div>
+</div>
 
-  <div id="basquetbol" class="catalogo">
-    <div class="producto"><img src="balon wilson.jpg"><h3>Wilson NBA</h3><p>$900</p><button onclick="agregarAlCarrito('Wilson NBA', 900)">Agregar</button></div>
-    <div class="producto"><img src="balon spalding.jpg"><h3>Spalding</h3><p>$850</p><button onclick="agregarAlCarrito('Spalding', 850)">Agregar</button></div>
-    <div class="producto"><img src="balon jordan.jpg"><h3>Jordan FIBA</h3><p>$380</p><button onclick="agregarAlCarrito('Jordan FIBA', 380)">Agregar</button></div>
+<div id="basquetbol" class="catalogo">
+  <div class="producto">
+    <img src="balon wilson.jpg">
+    <h3>Wilson NBA</h3>
+    <p>Balón oficial de la NBA con superficie antideslizante y gran rebote.</p>
+    <p>$900</p>
+    <button onclick="agregarAlCarrito('Wilson NBA', 900)">Agregar</button>
   </div>
+  <div class="producto">
+    <img src="balon spalding.jpg">
+    <h3>Spalding</h3>
+    <p>Balón clásico para interiores, excelente para torneos escolares.</p>
+    <p>$850</p>
+    <button onclick="agregarAlCarrito('Spalding', 850)">Agregar</button>
+  </div>
+  <div class="producto">
+    <img src="balon jordan.jpg">
+    <h3>Jordan FIBA</h3>
+    <p>Diseño oficial FIBA, ideal para partidos intensos y prácticas diarias.</p>
+    <p>$380</p>
+    <button onclick="agregarAlCarrito('Jordan FIBA', 380)">Agregar</button>
+  </div>
+</div>
 
-  <div id="voleibol" class="catalogo">
-    <div class="producto"><img src="balon economico voit.jpg"><h3>Voit V200W</h3><p>$200</p><button onclick="agregarAlCarrito('Voit V200W', 200)">Agregar</button></div>
-    <div class="producto"><img src="balon gaser azul.jpg"><h3>Gaser V5M5000</h3><p>$320</p><button onclick="agregarAlCarrito('Gaser V5M5000', 320)">Agregar</button></div>
-    <div class="producto"><img src="balon molten.jpg"><h3>Molten AVP</h3><p>$580</p><button onclick="agregarAlCarrito('Molten AVP', 580)">Agregar</button></div>
+<div id="voleibol" class="catalogo">
+  <div class="producto">
+    <img src="balon economico voit.jpg">
+    <h3>Voit V200W</h3>
+    <p>Balón básico y resistente para uso escolar y entrenamientos ligeros.</p>
+    <p>$200</p>
+    <button onclick="agregarAlCarrito('Voit V200W', 200)">Agregar</button>
   </div>
+  <div class="producto">
+    <img src="balon gaser azul.jpg">
+    <h3>Gaser V5M5000</h3>
+    <p>Modelo semiprofesional con buena absorción de impacto y precisión.</p>
+    <p>$320</p>
+    <button onclick="agregarAlCarrito('Gaser V5M5000', 320)">Agregar</button>
+  </div>
+  <div class="producto">
+    <img src="balon molten.jpg">
+    <h3>Molten AVP</h3>
+    <p>Balón premium certificado, utilizado en torneos de alto nivel.</p>
+    <p>$580</p>
+    <button onclick="agregarAlCarrito('Molten AVP', 580)">Agregar</button>
+  </div>
+</div>
 
-  <div id="americano" class="catalogo">
-    <div class="producto"><img src="balon nike rojo.jpg"><h3>Nike NFL</h3><p>$450</p><button onclick="agregarAlCarrito('Nike NFL', 450)">Agregar</button></div>
-    <div class="producto"><img src="balon wilson.jpg"><h3>Wilson Vapor</h3><p>$320</p><button onclick="agregarAlCarrito('Wilson Vapor', 320)">Agregar</button></div>
-    <div class="producto"><img src="balon voit cafe.jpg"><h3>Voit 395</h3><p>$290</p><button onclick="agregarAlCarrito('Voit 395', 290)">Agregar</button></div>
+<div id="americano" class="catalogo">
+  <div class="producto">
+    <img src="balon nike rojo.jpg">
+    <h3>Nike NFL</h3>
+    <p>Balón con textura de agarre mejorado, ideal para partidos al aire libre.</p>
+    <p>$450</p>
+    <button onclick="agregarAlCarrito('Nike NFL', 450)">Agregar</button>
   </div>
+  <div class="producto">
+    <img src="balon wilson.jpg">
+    <h3>Wilson Vapor</h3>
+    <p>Ligero y resistente, con válvula de aire sellada para máxima duración.</p>
+    <p>$320</p>
+    <button onclick="agregarAlCarrito('Wilson Vapor', 320)">Agregar</button>
+  </div>
+  <div class="producto">
+    <img src="balon voit cafe.jpg">
+    <h3>Voit 395</h3>
+    <p>Balón recreativo con diseño tradicional y superficie duradera.</p>
+    <p>$290</p>
+    <button onclick="agregarAlCarrito('Voit 395', 290)">Agregar</button>
+  </div>
+</div>
 
   <div id="carrito">
     <h3>Carrito</h3>
@@ -243,20 +372,51 @@
       });
       carrito = [];
       actualizarCarrito();
-      alert("¡Compra realizada!");
+      alert('Compra realizada con éxito.');
+      cerrarCarrito();
     }
 
-    function cerrarCarrito() {
-      document.getElementById('carrito').style.display = 'none';
-    }
-
-    document.getElementById('carritoToggle').addEventListener('click', () => {
-      const carritoDiv = document.getElementById('carrito');
+    const carritoToggle = document.getElementById('carritoToggle');
+    const carritoDiv = document.getElementById('carrito');
+    carritoToggle.addEventListener('click', () => {
       carritoDiv.style.display = carritoDiv.style.display === 'block' ? 'none' : 'block';
     });
 
-    window.onload = () => mostrarTodos();
-  </script>
+    function cerrarCarrito() {
+      carritoDiv.style.display = 'none';
+    }
 
+    // Registro y control acceso
+    function validarRegistro() {
+      const nombre = document.getElementById('nombre').value.trim();
+      const clave = document.getElementById('clave').value.trim();
+
+      if(nombre === '' || clave === '') {
+        alert('Por favor, ingresa nombre y contraseña');
+        return false;
+      }
+
+      sessionStorage.setItem('usuarioRegistrado', 'true');
+      document.getElementById('registro').style.display = 'none';
+      mostrarTodos();
+      document.getElementById('carritoToggle').style.display = 'inline-block';
+      return false; // evitar recarga
+    }
+
+    function checkRegistro() {
+      if(sessionStorage.getItem('usuarioRegistrado') === 'true') {
+        document.getElementById('registro').style.display = 'none';
+        mostrarTodos();
+        document.getElementById('carritoToggle').style.display = 'inline-block';
+      } else {
+        ocultarTodos();
+        document.getElementById('carritoToggle').style.display = 'none';
+      }
+    }
+
+    window.onload = () => {
+      checkRegistro();
+    };
+  </script>
 </body>
 </html>
